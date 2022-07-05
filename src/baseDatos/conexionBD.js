@@ -1,27 +1,23 @@
-const mongoose = require('mongoose');
-const cadenaConexion ='mongodb://mongodb/drive'
+const mongoose = require("mongoose");
+const cadenaConexion = "mongodb://mongodb/drive";
 
 //Conexion Base Datos
 
-const conexion =  () =>{
- mongoose.connect(cadenaConexion, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-},(err) =>{
-    if(err)
+const conexion = () => {
+  mongoose.connect(
+    cadenaConexion,
     {
-        console.log('DB Error');
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    },
+    (err) => {
+      if (err) {
+        console.log("DB Error");
+      } else {
+        console.log("Conexion Correcta");
+      }
     }
-    else
-    {
-        console.log('Conexion Correcta');
-    }
-})
-}
-
-
+  );
+};
 
 module.exports = conexion;
-
-
-
