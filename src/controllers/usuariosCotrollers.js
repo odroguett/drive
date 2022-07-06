@@ -1,9 +1,9 @@
 const express = require("express");
+const objetoRespuesta = require("../OTD/respuesta");
 const Usuarios = require("../../src/entidades/usuarios");
 const router = express.Router();
 
 usuarios = new Usuarios();
-
 //Get pruebas
 router.get(
   "/",
@@ -28,6 +28,19 @@ router.get(
   }
 );
 
+router.get(
+  "/obtenerUsuario",
+  async (req, res, next) => {
+    let usuario = req.query.usuario;
+    const respuesta = await usuarios.buscarUsuario(usuario);
+    if (respuesta === undefined) {
+      res.status(400).json("Error");
+    } else {
+      res.status(200).json(respuesta);
+    }
+  }
+);
+
 //POST
 router.post("/crearUsuario", async (req, res, next) => {
   const datos = req.body;
@@ -42,12 +55,13 @@ router.post("/crearUsuario", async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
     const datos = req.body;
-    console.log(datos);
-    const respuesta = await usuarios.autentificarUsuario(datos.usuario,datos.password);
-    if (respuesta === false) {
-      res.status(400).json("No permitido");
+    let oRespuesta = objetoRespuesta;
+    oRespuesta = await usuarios.autentificarUsuario(datos.usuario,datos.password);
+    
+    if (oRespuesta.respuestaEsValido === false) {
+      res.status(400).json(oRespuesta);
     } else {
-      res.status(200).json("Permitido");
+      res.status(200).json(oRespuesta);
     }
   });
   

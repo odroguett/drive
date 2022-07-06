@@ -1,40 +1,93 @@
 const conexion = require("../baseDatos/conexionBD");
 const Usuario = require("../baseDatos/modelo/usuarioModelo");
 const bcrypt = require('bcrypt');
+const objetoRespuesta = require("../OTD/respuesta");
 
 class Usuarios {
-  constructor() {}
+
+  constructor() {
+  }
+  
 
   buscarListaUsuario = async (usuario) =>{
     try {
-      const respuesta = await Usuario.find();
-      return respuesta;
+
+      let oRespuesta = objetoRespuesta;
+      oRespuesta.esValido = true;
+      oRespuesta.mensaje ="Usuario obtenido con exito";
+
+      oRespuesta.objeto = await Usuario.find();
+      return oRespuesta;
+
     } catch (error) {
+      oRespuesta.esValido = false;
+      oRespuesta.mensaje ="No existen usuarios registrados";
+    }
+  }
+
+  buscarUsuario = async (usuario) =>{
+    let oRespuesta = objetoRespuesta;
+    try {
+      
+      if(usuario ===undefined)
+      {
+
+        oRespuesta.esValido = false;
+        oRespuesta.mensaje ="No existe usuario";  
+        return oRespuesta;
+      }
+      oRespuesta.objeto = await Usuario.findOne({
+        usuario
+      });
+
+      if(oRespuesta.objeto != null || oRespuesta.objeto != undefined)
+      {
+        oRespuesta.esValido = true;
+        oRespuesta.mensaje ="Usuario obtenido con exito";
+        return oRespuesta
+      }
+      else
+      {
+        oRespuesta.esValido = false;
+        oRespuesta.mensaje ="No existe Usuario";
+        return oRespuesta
+
+      }
+
+    } catch (error) {
+      oRespuesta.esValido = false;
       console.log(error);
+      oRespuesta.mensaje ="No existen usuarios registrados";
+      return oRespuesta;
     }
   }
 
   autentificarUsuario = async (usuario,password) =>
   {
     try {
+     let oRespuesta = objetoRespuesta;
       
-      const respuesta = await Usuario.findOne({
+     console.log(oRespuesta);
+      const respuestaUsuario = await Usuario.findOne({
         usuario
       })
-      console.log(password);
-      console.log(respuesta.password);
-      if( await bcrypt.compare(password,respuesta.password))
+      
+      if( await bcrypt.compare(password,respuestaUsuario.password))
       {
-
-        return true;
+        
+        oRespuesta.esValido = true;
+        oRespuesta.mensaje ="Usuario autentificado con exito";
+        return oRespuesta;
       }
       else
       {
-        return false;
+        
+        this.oRespuesta.esValido =false;
+        this.oRespuesta.mensaje ="Error al autentificar usuario";
+        console.log(this.oRespuesta);
+        return this.oRespuesta;
 
       }
-
-      return respuesta;
   
 } catch (error) {
   
@@ -91,7 +144,7 @@ class Usuarios {
     if(encontrarUsuario === null)
     {
 
-      return "Usuario no existe"
+      return false;
     }
     encontrarUsuario.nombre = data.nombre;
     console.log(data.nombre);
