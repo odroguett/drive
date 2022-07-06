@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const cadenaConexion = "mongodb://mongodb/drive";
+const cadenaConexion = "mongodb://root:12345@mongodb:27017/drive?authSource=admin";
 
 //Conexion Base Datos
 
