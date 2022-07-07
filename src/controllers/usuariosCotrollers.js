@@ -1,6 +1,6 @@
 const express = require("express");
 const objetoRespuesta = require("../OTD/respuesta");
-const Usuarios = require("../../src/entidades/usuarios");
+const Usuarios = require("../casoUso/casoUso.usuarios");
 const router = express.Router();
 
 usuarios = new Usuarios();
@@ -57,8 +57,9 @@ router.post("/login", async (req, res, next) => {
     const datos = req.body;
     let oRespuesta = objetoRespuesta;
     oRespuesta = await usuarios.autentificarUsuario(datos.usuario,datos.password);
+    console.log(oRespuesta);
     
-    if (oRespuesta.respuestaEsValido === false) {
+    if (oRespuesta.esValido === false) {
       res.status(400).json(oRespuesta);
     } else {
       res.status(200).json(oRespuesta);

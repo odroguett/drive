@@ -1,7 +1,7 @@
 
 const routes = require ('./src/routes/routes')
 const express = require('express');
-const config = require('./src/entidades/variablesEntorno/config');
+const config = require('./src/variablesEntorno/config');
 const conexionBD = require('./src/baseDatos/conexionBD')
 
 // Constants
