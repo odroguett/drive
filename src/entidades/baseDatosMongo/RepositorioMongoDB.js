@@ -1,8 +1,15 @@
+
+
 class RepositorioMongoDB{
-    
-    buscar(objeto,modelo)
+    constructor(patron)
     {
-        console.log(modelo);
+       this.patron = patron; 
+    }
+
+    
+    buscar()
+    {
+        console.log(patron);
 
     }
 

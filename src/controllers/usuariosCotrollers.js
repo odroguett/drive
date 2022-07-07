@@ -9,7 +9,6 @@ router.get(
   "/",
 
   async (req, res, next) => {
-    console.log("Cramos Usuario");
     res.status(400).json("Prueba Nodemon");
   }
 );

@@ -1,14 +1,11 @@
+const modeloUsuario = require("./usuariosFaker");
 const constantes = require("../entidadesBase/constantes");
-const modeloUsuario = require("./usuarios");
 
-
-class fabricaModelo {
+class fabricaFaker {
   crearModelo(modelo) {
     switch (modelo) {
       case constantes.MODELO_USUARIO:
-        
-        return new  modeloUsuario();
-        break;
+        return new modeloUsuario();
 
       default:
         break;
@@ -16,4 +13,4 @@ class fabricaModelo {
   }
 }
 
-module.exports = fabricaModelo;
+module.exports = fabricaFaker;

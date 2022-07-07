@@ -1,11 +1,16 @@
 const bcrypt = require("bcrypt");
 const objetoRespuesta = require("../OTD/respuesta");
 const baseDatos = require("../entidades/baseDatosSuperFabrica");
+const constantes = require("../entidades/entidadesBase/constantes");
+const usuariosOtd = require("../OTD/usuariosOTD");
+const utilidades = require("../entidades/entidadesBase/utilidades");
+
+
 
 //#region "Carga base de datos"
   var DB = new baseDatos();
-  const modelo = DB.conexionBaseDatos("MongoDB");
-  const usuarios = modelo.crearModelo("USUARIO");
+  const modelo = DB.conexionBaseDatos(constantes.MONGO_DB);
+  const usuarios = modelo.crearModelo(constantes.MODELO_USUARIO);
 //#endregion
 
 class Usuarios {
@@ -53,41 +58,13 @@ class Usuarios {
       return oRespuesta;
     }
   };
-
-  // autentificarUsuario = async (usuario, password) => {
-  //   try {
-  //     let oRespuesta = objetoRespuesta;
-
-  //     console.log(oRespuesta);
-  //     const respuestaUsuario = await Usuario.findOne({
-  //       usuario,
-  //     });
-
-  //     if (await bcrypt.compare(password, respuestaUsuario.password)) {
-  //       oRespuesta.esValido = true;
-  //       oRespuesta.mensaje = "Usuario autentificado con exito";
-  //       return oRespuesta;
-  //     } else {
-  //       this.oRespuesta.esValido = false;
-  //       this.oRespuesta.mensaje = "Error al autentificar usuario";
-  //       console.log(this.oRespuesta);
-  //       return this.oRespuesta;
-  //     }
-  //   } catch (error) {}
-  // };
-
+  
   autentificarUsuario = async (usuario, password) => {
     let oRespuesta = objetoRespuesta;
     try {
-      
-      let usuarioModelo = usuarios.retornaModelo();
 
-      console.log(usuarioModelo);
-      const respuestaUsuario = await usuarioModelo.findOne({
-        usuario,
-      });
-
-      if (await bcrypt.compare(password, respuestaUsuario.password)) {
+      const respuestaUsuario = await usuarios.buscar(usuario);
+      if (await utilidades.compararValoresEncriptacion(password,respuestaUsuario.password)) {
         oRespuesta.esValido = true;
         oRespuesta.mensaje = "Usuario autentificado con exito";
         
