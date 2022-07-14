@@ -6,7 +6,7 @@ services:
     build: .
     restart: always
     ports:
-    - "5000:3000"
+    - "3000:3000"
     links:
      - mongodb
     volumes:
@@ -16,16 +16,19 @@ services:
    
     environment:
     - HOST:0.0.0.0
-    - PORT:4000
+    - PORT:3000
   mongodb: 
     container_name: mongodatabase
     image: mongo:4.4.6
     ports: 
     - "27017:27017"
     restart: always
+    logging:
+      driver: "none"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: 12345
+      ME_CONFIG_MONGODB_URL: mongodb://root:12345@mongodb:27017/
 
   mongo-express:
     image: mongo-express:latest

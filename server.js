@@ -1,18 +1,29 @@
-
-const routes = require ('./src/routes/routes')
+const routes = require('./src/routes/routes')
 const express = require('express');
 const config = require('./src/variablesEntorno/config');
 const conexionBD = require('./src/baseDatos/conexionBD')
+const ErrorMiddleware = require('./src/middleware/error');
+const logger = require('./src/logger/logger');
 
-// Constants
+// Constantes
 const PORT = config.PORT;
 const HOST = config.HOST;
 const app = express();
 
+const errorMiddleware = new ErrorMiddleware();
+
 app.use(express.json());
+
 
 conexionBD();
 
 routes(app);
+
+app.use(errorMiddleware.logError);
+app.use(errorMiddleware.boomErrorHandler);
+app.use(errorMiddleware.logErrorHandler);
+app.use(errorMiddleware.invalidPathHandler);
+
+
 app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+logger.info(`Running on http://${HOST}:${PORT}`)
