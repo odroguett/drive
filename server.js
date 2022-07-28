@@ -26,5 +26,6 @@ app.use(errorMiddleware.logErrorHandler);
 app.use(errorMiddleware.invalidPathHandler);
 
 
+
 app.listen(PORT, HOST);
 logger.info(`Running on http://${HOST}:${PORT}`)

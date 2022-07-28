@@ -1,3 +1,4 @@
+const { date } = require('joi');
 const multer = require('multer');
 
 var directorio = multer.diskStorage({
@@ -6,9 +7,9 @@ var directorio = multer.diskStorage({
     },
     filename: function  (req,file,cb)
     {
-        cb(null, file.filename + '-' + Datetime.now());
-    }
-})
+        cb(null, file.originalname + '-' + Date.now());
+    },
+});
 const subir = multer({storage : directorio});
 
 
