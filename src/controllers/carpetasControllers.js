@@ -101,7 +101,7 @@ router.post("/subir", autorizacion,multer.single("archivo") ,async (req, res, ne
     
     const respuesta = await carpetas.agregarArchivoCarpeta(json);
     if (respuesta === undefined) {
-        throw boom.badRequest('Error al crear Carpeta');
+        throw boom.badRequest('Error al crear archivo');
     } else {
         res.status(200).json(respuesta);
     }
