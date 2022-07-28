@@ -74,6 +74,7 @@ class Carpetas {
             return oRespuesta;
         }
     };
+    
     eliminarCarpeta = async (id) => {
         let oRespuesta = objetoRespuesta;
         try {
@@ -113,5 +114,23 @@ class Carpetas {
             console.log(error);
         }
     };
+
+    agregarArchivoCarpeta = async (data) => {
+        let oRespuesta = objetoRespuesta;
+        try {
+            
+            const respuesta = await carpetas.agregarArchivo(data);
+            oRespuesta.esValido = true;
+            oRespuesta.mensaje = "Archivo ingresada con exito";
+            oRespuesta.objeto = respuesta;
+            return oRespuesta;
+        } catch (error) {
+            logger.info(error);
+            oRespuesta.esValido = false;
+            oRespuesta.mensaje = error;
+            return oRespuesta;
+        }
+    };
+    
 }
 module.exports =Carpetas;

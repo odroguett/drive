@@ -38,6 +38,16 @@ class Carpeta extends RepositorioMongoDB {
 
     }
 
+    agregarArchivo(obCarpeta) {
+        console.log(obCarpeta);
+
+      return  modelo.updateOne(
+            { id_: "2" },
+            { $push: { archivo : [ obCarpeta] } },
+            
+          );
+    }
+
 }
 
 module.exports = Carpeta;

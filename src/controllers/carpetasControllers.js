@@ -7,6 +7,7 @@ const logger = require('../../src/logger/logger');
 const validador = require('../middleware/validador');
 const autorizacion = require('../middleware/auth');
 const {carpetaSchema} = require('../OTD/validadores/joiCarpetas');
+const multer = require('../middleware/multer');
 
 carpetas = new Carpetas();
 
@@ -54,7 +55,7 @@ router.post("/crearCarpeta", autorizacion,  async (req, res, next) => {
     if (respuesta === undefined) {
         throw boom.badRequest('Error al crear Carpeta');
     } else {
-        res.status(200).json("Exito");
+        res.status(200).json(respuesta);
     }
 });
 
@@ -89,5 +90,30 @@ router.patch("/actualizarCarpeta", async (req, res, next) => {
         res.status(200).json(respuesta);
     }
 });
+
+router.post("/subir", autorizacion,multer.single("archivo") ,async (req, res, next) => {
+  
+    const datos = req.body;
+    const nombreArchivo = req.file.filename;
+    const json = JSON.parse(datos.objectJSON);
+    json.nombre = nombreArchivo;
+    json.link = nombreArchivo;
+    
+    const respuesta = await carpetas.agregarArchivoCarpeta(json);
+    if (respuesta === undefined) {
+        throw boom.badRequest('Error al crear Carpeta');
+    } else {
+        res.status(200).json(respuesta);
+    }
+  });
+  
+  router.post("/subirArchivos",autorizacion,multer.array("archivos",10),async (req, res, next) => {
+    const datos = req.body;
+    const nombreArchivo = req.file.filename;
+    console.log(nombreArchivo);
+     await res.send("single file upload");
+  });
+  
+  
 
 module.exports =router;

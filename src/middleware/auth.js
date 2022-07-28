@@ -4,7 +4,7 @@ const boom = require('@hapi/boom')
 
 function autorizacion(req, res, next) {
     const tokenAcceso = req.headers['authorization'] || req.query.token;
-    console.log(tokenAcceso);
+    
     let llavePrivada = variablesEntorno.LLAVE_PRIVADA
     if (! tokenAcceso) 
         res.send('Acceso denegado');
