@@ -66,6 +66,8 @@ class Usuarios {
         let oRespuesta = objetoRespuesta;
         try {
 
+            
+
             const respuestaUsuario = await usuarios.buscar(usuario);
 
             const passwordEncriptado = respuestaUsuario.map(p => p.password).shift();

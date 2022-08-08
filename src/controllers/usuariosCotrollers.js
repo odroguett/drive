@@ -63,11 +63,14 @@ router.post("/crearUsuario", autorizacion, validador(usuarioSchema, 'body'), asy
     }
 });
 
-router.post("/login", validador(usuarioLoginSchema, 'body'), async (req, res, next) => {
+router.post("/login", async (req, res, next) => {
 
+    console.log(req.body.usuario);
     try {
 
         const datos = req.body;
+
+        
         let token;
         const respuesta = null || await usuarios.autentificarUsuario(datos.usuario, datos.password);
         token = await usuarios.generarTokenUsuario(datos.usuario);

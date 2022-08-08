@@ -5,6 +5,7 @@ const conexionBD = require('./src/baseDatos/conexionBD')
 const ErrorMiddleware = require('./src/middleware/error');
 const logger = require('./src/logger/logger');
 const multer = require('./src/middleware/multer');
+const cors = require('cors');
 
 // Constantes
 const PORT = config.PORT;
@@ -14,6 +15,8 @@ const app = express();
 const errorMiddleware = new ErrorMiddleware();
 
 app.use(express.json());
+app.use(cors());
+
 
 
 conexionBD();
