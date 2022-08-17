@@ -20,12 +20,12 @@ const usuarios = modelo.crearModelo(constantes.MODELO_USUARIO);
 class Usuarios {
     constructor() {}
 
-    buscarListaUsuario = async (usuario) => {
+    buscarListaUsuario = async (id) => {
         try {
             let oRespuesta = objetoRespuesta;
             oRespuesta.esValido = true;
             oRespuesta.mensaje = "Usuario obtenido con exito";
-            oRespuesta.objeto = await usuarios.buscarTodos();
+            oRespuesta.objeto = await usuarios.buscarTodos(id);
             return oRespuesta;
         } catch (error) {
             logger.info(error);

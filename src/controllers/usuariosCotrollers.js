@@ -16,9 +16,9 @@ router.get("/", autorizacion, async (req, res, next) => {
 
 
 router.get("/obtenerListaUsuarios", autorizacion, async (req, res, next) => {
-
+    let id = req.query.id;    
     try {
-        const respuesta = await usuarios.buscarListaUsuario();
+        const respuesta = await usuarios.buscarListaUsuario(id);
         if (respuesta === undefined) {
             throw boom.notFound('No existen usuarios');
         } else {

@@ -10,8 +10,8 @@ class Usuarios extends RepositorioMongoDB {
 
     }
 
-    buscarTodos() {
-        return modelo.find();
+    buscarTodos(id) {
+        return modelo.find({institucion_id: id });
 
     }
 

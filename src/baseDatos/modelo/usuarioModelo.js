@@ -13,11 +13,6 @@ const usuarioSchema = new schema({
         minlength: 6,
         required: true
     },
-    nombre: {
-        type: String,
-        default: "",
-        required: false
-    },
     descripcion: {
         type: String,
         default: "",
