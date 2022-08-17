@@ -22,7 +22,7 @@ class Carpeta extends RepositorioMongoDB {
         return modelo.create({
             _id: obCarpeta.id,
             nombre: obCarpeta.nombre,
-            
+            usuario: obCarpete.usuario,
         })
     }
     eliminar(id) {
