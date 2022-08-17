@@ -50,7 +50,7 @@ router.get("/obtenerCarpeta", autorizacion, async (req, res, next) => {
 
 router.post("/crearCarpeta", autorizacion,  async (req, res, next) => {
     const datos = req.body;
-   
+   console.log(req.body);
     const respuesta = await carpetas.agregarCarpeta(datos);
     if (respuesta === undefined) {
         throw boom.badRequest('Error al crear Carpeta');

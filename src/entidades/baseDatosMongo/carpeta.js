@@ -18,11 +18,11 @@ class Carpeta extends RepositorioMongoDB {
     }
 
     agregar(obCarpeta) {
+        console.log(obCarpeta.nombre);
         
         return modelo.create({
-            _id: obCarpeta.id,
             nombre: obCarpeta.nombre,
-            usuario: obCarpete.usuario,
+            usuario: obCarpeta.usuario,
         })
     }
     eliminar(id) {
