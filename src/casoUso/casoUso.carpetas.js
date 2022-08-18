@@ -30,16 +30,16 @@ class Carpetas {
         }
     };
 
-    buscarCarpetas = async (id) => {
+    buscarCarpetas = async (usuario) => {
 
         let oRespuesta = objetoRespuesta;
         try {
-            if (id === undefined) {
+            if (usuario === undefined) {
                 oRespuesta.esValido = false;
-                oRespuesta.mensaje = "No existe carpeta";
+                oRespuesta.mensaje = "No existe usuario con carpeta asociada";
                 return oRespuesta;
             }
-            oRespuesta.objeto = await carpetas.buscar(id);
+            oRespuesta.objeto = await carpetas.buscar(usuario);
 
             if (oRespuesta.objeto != null && oRespuesta.objeto != undefined && oRespuesta.objeto.length > 0) {
                 oRespuesta.esValido = true;

@@ -30,11 +30,8 @@ router.get("/obtenerListaCarpetas", autorizacion, async (req, res, next) => {
 
 router.get("/obtenerCarpeta", autorizacion, async (req, res, next) => {
     try {
-        let id = req.query.id;
-
-        const respuesta = null || await carpetas.buscarCarpetas(id);
-        console.log(respuesta);
-
+        let usuario = req.query.usuario;
+        const respuesta = null || await carpetas.buscarCarpetas(usuario);
         if (respuesta === null) {
             throw boom.notFound("Error al obtener Carpeta");
         } else {
