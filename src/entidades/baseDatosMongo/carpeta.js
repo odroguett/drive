@@ -6,8 +6,8 @@ class Carpeta extends RepositorioMongoDB {
     retornaModelo() {
         return modelo;
     }
-    buscar(usuario) {
-        return modelo.find({usuario: usuario});
+    buscar(id) {
+        return modelo.find({_id: id});
 
     }
 

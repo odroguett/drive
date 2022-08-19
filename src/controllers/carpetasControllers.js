@@ -30,8 +30,9 @@ router.get("/obtenerListaCarpetas", autorizacion, async (req, res, next) => {
 
 router.get("/obtenerCarpeta", autorizacion, async (req, res, next) => {
     try {
-        let usuario = req.query.usuario;
-        const respuesta = null || await carpetas.buscarCarpetas(usuario);
+        let idCarpeta = req.query.id;
+        
+        const respuesta = null || await carpetas.buscarCarpetas(idCarpeta);
         if (respuesta === null) {
             throw boom.notFound("Error al obtener Carpeta");
         } else {
@@ -88,7 +89,7 @@ router.patch("/actualizarCarpeta", async (req, res, next) => {
     }
 });
 
-router.post("/subir", autorizacion,multer.single("archivo") ,async (req, res, next) => {
+/* router.post("/subir", autorizacion,multer.single("archivo") ,async (req, res, next) => {
   
     const datos = req.body;
     const nombreArchivo = req.file.filename;
@@ -111,6 +112,6 @@ router.post("/subir", autorizacion,multer.single("archivo") ,async (req, res, ne
      await res.send("single file upload");
   });
   
-  
+   */
 
 module.exports =router;

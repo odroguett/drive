@@ -10,7 +10,7 @@ const carpetaSchema = new schema({
         required: true
     },
     usuario: { type: String},
-    archivo:[],
+    archivo:[ ],
     
 })
 
