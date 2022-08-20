@@ -21,6 +21,7 @@ class Instituciones extends RepositorioMongoDB {
         return modelo.create({
             _id: obInstitucion.id,
             descripcion: obInstitucion.descripcion,
+            rut: obInstitucion.rut,
             
         })
     }

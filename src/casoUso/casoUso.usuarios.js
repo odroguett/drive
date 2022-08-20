@@ -8,6 +8,7 @@ const {date} = require("joi");
 const respuesta = require("../OTD/respuesta");
 const config = require("../variablesEntorno/config")
 const logger = require('../logger/logger');
+const fs = require('fs');
 
 
 // #region "Carga base de datos"

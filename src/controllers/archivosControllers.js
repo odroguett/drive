@@ -6,10 +6,14 @@ const boom = require('@hapi/boom')
 const logger = require('../../src/logger/logger');
 const validador = require('../middleware/validador');
 const autorizacion = require('../middleware/auth');
+const utilidades = require("../entidades/entidadesBase/utilidades");
 //const {carpetaSchema} = require('../OTD/validadores/joiCarpetas');
 const multer = require('../middleware/multer');
 const path = require('path');
+const archiver = require('archiver');
+const fs = require('fs');
 archivos = new Archivos();
+oUtilidades = new utilidades();
 
 router.post("/subir", autorizacion,multer.single("archivo") ,async (req, res, next) => {
   
@@ -43,22 +47,27 @@ router.post("/subir", autorizacion,multer.single("archivo") ,async (req, res, ne
         next(error);
     }
 })
-    router.get("/descargar", autorizacion, async(req,res,next) =>{
+    router.get("/descargar", autorizacion, async (req,res,next) =>{ 
         try {
-            let oRespuesta = objetoRespuesta;
-            oRespuesta.esValido = true;
-            let idArchivo = req.query.id;
             const dirPath = "./archivos/";
-            console.log(dirPath + idArchivo)
-            res.download(dirPath + idArchivo);
-            
-           
+            const dirPathZip = "./archivos/zip/";
+            let archivo = dirPathZip + "comprimido.zip"; 
+            let idArchivo = req.query.id;
+            let writestream =fs.createWriteStream(archivo);
+            let archive = archiver('zip');
+            archive.pipe(writestream);
+            archive.append(fs.createReadStream(dirPath + idArchivo),{name:idArchivo});
+            writestream.on('close', () => {
+               res.download(archivo,() => {
+                    fs.unlinkSync(archivo);
+               });
+               
+            } )
+            archive.finalize();
         } catch (error) {
             logger.info(error);
             next(error);
         }   
-    
-
 });
 
   

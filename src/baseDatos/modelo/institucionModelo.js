@@ -9,6 +9,9 @@ const institucionSchema = new schema({
         type: String,
         minlength: 6,
         required: true
+    },
+    rut: {
+        type: String,
     }
 },{_id:false})
 

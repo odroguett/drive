@@ -9,12 +9,11 @@ var directorio = multer.diskStorage({
     },
     filename: function  (req,file,cb)
     {
-        nombreArchivo = file.originalname + Date.now();
+        nombreArchivo = Date.now() + file.originalname;
         cb(null, nombreArchivo);
     },
 });
 const subir = multer({storage : directorio});
-
 
 module.exports =  subir
     
