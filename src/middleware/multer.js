@@ -9,6 +9,7 @@ var directorio = multer.diskStorage({
     },
     filename: function  (req,file,cb)
     {
+        console.log(file);
         nombreArchivo = Date.now() + file.originalname;
         cb(null, nombreArchivo);
     },

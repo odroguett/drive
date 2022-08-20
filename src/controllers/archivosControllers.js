@@ -18,6 +18,7 @@ oUtilidades = new utilidades();
 router.post("/subir", autorizacion,multer.single("archivo") ,async (req, res, next) => {
   
     const datos = req.body;
+    console.log(datos);
     const nombreArchivo = req.file.filename;
     const json = JSON.parse(datos.objectJSON);
     //json.nombre = nombreArchivo;
