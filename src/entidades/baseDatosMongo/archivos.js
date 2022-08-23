@@ -9,6 +9,12 @@ class Archivos extends RepositorioMongoDB {
     return modelo.find({ _id: id })
   }
 
+  maximoArchivo()
+  {
+
+    return modelo.find({},{numero:1,_id:0}).sort({numero: -1}).limit(1);
+  }
+
   buscarArchivos(idCarpeta) {
     return modelo.find({ id_carpeta: idCarpeta  })
   }

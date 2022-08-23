@@ -20,7 +20,23 @@ class Archivos {
     agregarArchivo = async (data) => {
         let oRespuesta = objetoRespuesta;
         try {
+            let arrNumero =[];
+            let numero=0;
+            arrNumero = await archivos.maximoArchivo();
+            numero = Number(arrNumero[0].numero);
             
+            console.log(numero);
+            
+            if (numero > 0)
+            {
+                numero = numero + 1;
+            }
+            else
+            {
+               numero = 1;     
+            }
+            data.numero =numero;
+
             const respuesta = await archivos.agregarArchivo(data);
             oRespuesta.esValido = true;
             oRespuesta.mensaje = "Archivo ingresada con exito";
