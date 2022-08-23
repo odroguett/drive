@@ -23,19 +23,18 @@ class Archivos {
             let arrNumero =[];
             let numero=0;
             arrNumero = await archivos.maximoArchivo();
-            numero = Number(arrNumero.find(p=> p.numero).numero);
-            console.log(numero);
-
-            if (numero > 0)
+            console.log(arrNumero)
+            if(arrNumero.length===0)
             {
-                numero = numero + 1;
+                numero = 1;     
+
             }
             else
             {
-               numero = 1;     
+                numero = Number(arrNumero.find(p=> p.numero).numero);
+                numero = numero + 1;
             }
             data.numero =numero;
-
             const respuesta = await archivos.agregarArchivo(data);
             oRespuesta.esValido = true;
             oRespuesta.mensaje = "Archivo ingresada con exito";
