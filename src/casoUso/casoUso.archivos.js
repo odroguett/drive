@@ -23,10 +23,9 @@ class Archivos {
             let arrNumero =[];
             let numero=0;
             arrNumero = await archivos.maximoArchivo();
-            numero = Number(arrNumero[0].numero);
-            
+            numero = Number(arrNumero.find(p=> p.numero).numero);
             console.log(numero);
-            
+
             if (numero > 0)
             {
                 numero = numero + 1;
