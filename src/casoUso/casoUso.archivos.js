@@ -17,6 +17,12 @@ const archivos = modelo.crearModelo(constantes.MODELO_ARCHIVOS);
 
 class Archivos {
 
+    maximoArchivo = async () =>{
+        let numero =0;
+        numero = await archivos.maximoArchivo();
+        return numero;
+    }
+
     agregarArchivo = async (data) => {
         let oRespuesta = objetoRespuesta;
         try {
@@ -35,6 +41,23 @@ class Archivos {
                 numero = numero + 1;
             }
             data.numero =numero;
+            const respuesta = await archivos.agregarArchivo(data);
+            oRespuesta.esValido = true;
+            oRespuesta.mensaje = "Archivo ingresada con exito";
+            oRespuesta.objeto = respuesta;
+            return oRespuesta;
+        } catch (error) {
+            logger.info(error);
+            oRespuesta.esValido = false;
+            oRespuesta.mensaje = error;
+            return oRespuesta;
+        }
+    };
+
+    agregarArchivoArray = async (data) => {
+        let oRespuesta = objetoRespuesta;
+        try {
+          
             const respuesta = await archivos.agregarArchivo(data);
             oRespuesta.esValido = true;
             oRespuesta.mensaje = "Archivo ingresada con exito";
