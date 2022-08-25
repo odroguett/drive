@@ -90,29 +90,5 @@ router.patch("/actualizarCarpeta", async (req, res, next) => {
     }
 });
 
-/* router.post("/subir", autorizacion,multer.single("archivo") ,async (req, res, next) => {
-  
-    const datos = req.body;
-    const nombreArchivo = req.file.filename;
-    const json = JSON.parse(datos.objectJSON);
-    json.nombre = nombreArchivo;
-    json.link = nombreArchivo;
-    
-    const respuesta = await carpetas.agregarArchivoCarpeta(json);
-    if (respuesta === undefined) {
-        throw boom.badRequest('Error al crear archivo');
-    } else {
-        res.status(200).json(respuesta);
-    }
-  });
-  
-  router.post("/subirArchivos",autorizacion,multer.array("archivos",10),async (req, res, next) => {
-    const datos = req.body;
-    const nombreArchivo = req.file.filename;
-    console.log(nombreArchivo);
-     await res.send("single file upload");
-  });
-  
-   */
 
 module.exports =router;
