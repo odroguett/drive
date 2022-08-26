@@ -110,6 +110,7 @@ router.get('/descargar', autorizacion, async (req, res, next) => {
 router.delete("/eliminarArchivo", autorizacion, async (req, res, next) => {
     try {
         const id = req.query.id;
+        console.log(id);
         const respuesta = await archivos.eliminarArchivo(id);
         if (respuesta === undefined) {
             throw boom.notFound('Archivo No Encontrado');

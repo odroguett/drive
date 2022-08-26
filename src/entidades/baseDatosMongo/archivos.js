@@ -29,8 +29,8 @@ class Archivos extends RepositorioMongoDB {
       usuario: obArchivo.usuario,
     })
   }
-  eliminar() {
-    return modelo.deleteOne({ _id: id })
+  eliminar(link) {
+    return modelo.deleteOne({ link: link })
   }
 
   actualizar(id, obArchivo) {

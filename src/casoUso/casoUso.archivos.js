@@ -84,6 +84,27 @@ class Archivos {
             oRespuesta.mensaje = "No existen carpetas ingresadas";
         }
     };
+
+    eliminarArchivo = async (id) => {
+        let oRespuesta = objetoRespuesta;
+        try {
+            const dirPath = './archivos/'
+            let archivo = dirPath + id;
+            const respuesta = await archivos.eliminar(id);
+            if(oRespuesta.esValido ==true)
+            {
+                fs.unlinkSync(archivo)
+            }
+            oRespuesta.esValido = true;
+            oRespuesta.mensaje = "Carpeta eliminado con exito";
+            return oRespuesta;
+        } catch (error) {
+            logger.info(error);
+            oRespuesta.esValido = false;
+            oRespuesta.mensaje = error;
+            return oRespuesta;
+        }
+    };
     
 }
 module.exports =Archivos;
