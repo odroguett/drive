@@ -7,11 +7,13 @@ const {date} = require("joi");
 const respuesta = require("../OTD/respuesta");
 const config = require("../variablesEntorno/config")
 const logger = require('../logger/logger');
+const fs = require('fs')
 
 // #region "Carga base de datos"
 var DB = new baseDatos();
 const modelo = DB.conexionBaseDatos(constantes.MONGO_DB);
 const carpetas = modelo.crearModelo(constantes.MODELO_CARPETAS);
+const archivos = modelo.crearModelo(constantes.MODELO_ARCHIVOS);
 // #endregion
 
 class Carpetas {
@@ -78,6 +80,19 @@ class Carpetas {
     
     eliminarCarpeta = async (id) => {
         let oRespuesta = objetoRespuesta;
+        let archivosArr = [];
+        const dirPath = './archivos/'
+        archivosArr = await archivos.buscarArchivos(id);
+        console.log(archivosArr);
+        if(archivosArr != undefined) 
+        {
+            archivosArr.forEach(element => {
+                console.log(dirPath + element.link);
+                fs.unlinkSync(dirPath + element.link)
+            });
+
+        }
+        
         try {
             const respuesta = await carpetas.eliminar(id);
             oRespuesta.esValido = true;

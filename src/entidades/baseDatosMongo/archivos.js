@@ -16,6 +16,7 @@ class Archivos extends RepositorioMongoDB {
   }
 
   buscarArchivos(idCarpeta) {
+    console.log(idCarpeta);
     return modelo.find({ id_carpeta: idCarpeta  })
   }
 
