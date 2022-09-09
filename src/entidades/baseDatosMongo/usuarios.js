@@ -15,6 +15,11 @@ class Usuarios extends RepositorioMongoDB {
 
     }
 
+    buscarlistaUsuarios() {
+        return modelo.find();
+
+    }
+
     agregar(obUsuario) {
         return modelo.create({
             usuario: obUsuario.usuario,

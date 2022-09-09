@@ -31,6 +31,22 @@ router.get("/obtenerListaUsuarios", autorizacion, async (req, res, next) => {
 
 });
 
+router.get("/obtenerListaUsuariosTodos", autorizacion, async (req, res, next) => {
+    
+    try {
+        const respuesta = await usuarios.buscarListaUsuarioTodos();
+        if (respuesta === undefined) {
+            throw boom.notFound('No existen usuarios');
+        } else {
+            res.status(200).json(respuesta);
+        }
+    } catch (error) {
+        logger.info(error);
+        next(error);
+    }
+
+});
+
 router.get("/obtenerUsuario", autorizacion, async (req, res, next) => {
     try {
         let usuario = req.query.usuario;

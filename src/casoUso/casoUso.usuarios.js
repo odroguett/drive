@@ -35,6 +35,20 @@ class Usuarios {
         }
     };
 
+    buscarListaUsuarioTodos= async () => {
+        try {
+            let oRespuesta = objetoRespuesta;
+            oRespuesta.esValido = true;
+            oRespuesta.mensaje = "Usuario obtenido con exito";
+            oRespuesta.objeto = await usuarios.buscarlistaUsuarios();
+            return oRespuesta;
+        } catch (error) {
+            logger.info(error);
+            oRespuesta.esValido = false;
+            oRespuesta.mensaje = "No existen usuarios registrados";
+        }
+    };
+
     buscarUsuario = async (usuario) => {
 
         let oRespuesta = objetoRespuesta;
