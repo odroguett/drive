@@ -68,7 +68,7 @@ router.get("/obtenerUsuario", autorizacion, async (req, res, next) => {
 });
 
 // POST
-router.post("/crearUsuario", autorizacion, validador(usuarioSchema, 'body'), async (req, res, next) => {
+router.post("/crearUsuario" , validador(usuarioSchema, 'body'), async (req, res, next) => {
     const datos = req.body;
     console.log(datos);
     const respuesta = await usuarios.agregarUsuario(datos);
