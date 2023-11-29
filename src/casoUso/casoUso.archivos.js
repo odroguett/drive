@@ -1,3 +1,4 @@
+//Prueba
 const objetoRespuesta = require("../OTD/respuesta");
 const baseDatos = require("../entidades/baseDatosSuperFabrica");
 const constantes = require("../entidades/entidadesBase/constantes");
